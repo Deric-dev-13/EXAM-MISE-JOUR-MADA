@@ -217,7 +217,7 @@
     /* =========================================
        4. GESTION DU MODAL PAIEMENT
        ========================================= */
-    function openModal(id) {
+  /*  function openModal(id) {
         currentItem = globalData.sujets.find(i => i.id == id);
         if(!currentItem) return;
 
@@ -233,11 +233,52 @@
         document.getElementById('codeInput').value = '';
 
         document.getElementById('modal').classList.add('active');
+    }*/
+    /* =========================================
+   MISE À JOUR DES FONCTIONS MODAL & WHATSAPP
+   ========================================= */
+
+function openModal(id) {
+    current = data.find(i => i.id == id);
+    if(!current) return;
+    
+    document.getElementById('mTitle').innerText = `${current.level} - ${current.subject}`;
+    document.getElementById('mPrice').innerText = current.price;
+    
+    // Réinitialiser le champ référence au lieu du fichier
+    document.getElementById('paymentRef').value = ''; 
+    
+    const waBtn = document.getElementById('waBtn');
+    waBtn.className = 'btn-wa ready'; // Le bouton est toujours actif maintenant
+    waBtn.innerHTML = '<i class="fab fa-whatsapp"></i> ENVOYER RÉFÉRENCE';
+    
+    document.getElementById('codeInput').value = '';
+    document.getElementById('modal').classList.add('active');
+}
+
+// Fonction modifiée pour envoyer la référence texte
+function sendToWhatsApp() {
+    if(!current) return;
+    
+    // Récupération de la référence saisie
+    const ref = document.getElementById('paymentRef').value.trim();
+    
+    if(ref === "") {
+        alert("Veuillez entrer la référence de la transaction mobile money.");
+        return;
     }
+
+    const msg = `Bonjour Admin,\nJe souhaite débloquer le document :\n*${current.level} - ${current.subject}*\nPrix: ${current.price}.\n\nVoici ma référence de paiement : *${ref}*`;
+    
+    const url = `https://wa.me/${ADMIN_PHONE}?text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank');
+}
+
+// Vous pouvez supprimer la fonction handleFile() car elle n'est plus utilisée.
 
     function closeModal() { document.getElementById('modal').classList.remove('active'); }
 
-    function handleFile() {
+  /*  function handleFile() {
         const file = document.getElementById('proofFile').files[0];
         if(file) {
             document.getElementById('fileStatus').innerText = "Image chargée : " + file.name;
@@ -252,7 +293,7 @@
         const msg = `Bonjour Admin,\nJe souhaite débloquer le document :\n*${currentItem.level} - ${currentItem.subject}*\nPrix: ${currentItem.price}.\n\n(Veuillez joindre la photo de la preuve ci-dessous)`;
         const url = `https://wa.me/${CONFIG.adminPhone}?text=${encodeURIComponent(msg)}`;
         window.open(url, '_blank');
-    }
+    }*/
 
     function verifyCode() {
         const input = document.getElementById('codeInput').value.trim();
