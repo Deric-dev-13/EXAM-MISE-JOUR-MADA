@@ -249,7 +249,7 @@
 
     function sendToWhatsApp() {
         if(!currentItem) return;
-        const msg = `Bonjour Admin,\nJe souhaite débloquer le document :\n*${currentItem.level} - ${currentItem.subject}*\nPrix: ${currentItem.price}.\n\n(Veuillez écrire la référence de paiement ou la photo de la preuve ci-dessous):`;
+        const msg = `Bonjour Admin,\nJe souhaite débloquer le document :\n*${currentItem.level} - ${currentItem.subject}*\nPrix: ${currentItem.price}.\n\n(Veuillez écrire la référence de paiement ou joindre la photo de preuve de paiement):`;
         const url = `https://wa.me/${CONFIG.adminPhone}?text=${encodeURIComponent(msg)}`;
         window.open(url, '_blank');
     }
