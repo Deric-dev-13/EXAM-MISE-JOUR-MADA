@@ -122,9 +122,10 @@
             </div>
 
             <label class="upload-zone">
-                <div style="margin-bottom: 20px; text-align: center;">
-                <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:8px;">Cliquez le bouton WhatsApp pour envoyer la preuve de paiement au admin et obtenez votre code pour débloquer.</p>
-                </div>
+                <i class="fas fa-camera fa-2x" style="color:var(--gold)"></i>
+                <div style="font-size:0.9rem; color:var(--text-muted); margin-top:5px;">Appuyez pour photo preuve</div>
+                <input type="file" id="proofFile" accept="image/*" style="display:none" onchange="handleFile()">
+                <div id="fileStatus" class="file-status"></div>
             </label>
 
             <button id="waBtn" class="btn-wa" onclick="sendToWhatsApp()">
